@@ -8,7 +8,13 @@ import PlantillaI, {
 
 import styles from "@/styles/preview.module.css";
 
-export default function Preview({ data }: { data: PlantillaI }) {
+export default function Preview({
+  data,
+  setData,
+}: {
+  data: PlantillaI;
+  setData: Function;
+}) {
   const preRef = useRef<HTMLPreElement>(null);
 
   useEffect(() => {

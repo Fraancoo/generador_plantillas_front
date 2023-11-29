@@ -1,7 +1,7 @@
-import PlantillaI from "@/interfaces/plantilla.interface";
+import { PlantillaFormulario } from "@/interfaces/plantilla.interface";
 import { useEffect, useState } from "react";
 
-export default function Formulario({ data }: { data: PlantillaI }) {
+export default function Formulario({ data }: { data: PlantillaFormulario }) {
   const [formulario, setFormulario] = useState<any>();
 
   useEffect(() => {

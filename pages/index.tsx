@@ -1,7 +1,11 @@
 import { useState } from "react";
 import Layout from "../components/Layout";
 
-import PlantillaI, { Seccion } from "../interfaces/plantilla.interface";
+import PlantillaI, {
+  Seccion,
+  PlantillaFormulario,
+  SeccionFormulario,
+} from "../interfaces/plantilla.interface";
 import TipoResultado from "../interfaces/tipo_resultado.interface";
 
 import styles from "@/styles/home.module.css";
@@ -23,6 +27,15 @@ export default function Home({
     secciones: [] as Seccion[],
   } as PlantillaI);
 
+  const [plantillaFormulario, setPlantillaFormulario] =
+    useState<PlantillaFormulario>({
+      idPlantilla: 1,
+      nombrePlantilla: "",
+      version: "1.0.0",
+      imprimible: true,
+      secciones: [] as SeccionFormulario[],
+    } as PlantillaFormulario);
+
   return (
     <Layout title="Generador de plantillas">
       <div className={styles.container}>
@@ -38,10 +51,11 @@ export default function Home({
             />
           </div>
           <div className={styles.div_preview}>
-            <Preview data={plantilla} />
+            <Preview data={plantilla} setData={(p: PlantillaFormulario) => console.log(p)
+            } />
           </div>
           <div className={styles.div_form}>
-            <Formulario data={plantilla} />
+            <Formulario data={plantillaFormulario} />
           </div>
         </div>
       </div>

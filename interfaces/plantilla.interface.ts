@@ -8,11 +8,19 @@ export default interface Plantilla {
   secciones: Seccion[];
 }
 
+export interface PlantillaFormulario extends Omit<Plantilla, "secciones"> {
+  secciones: SeccionFormulario[];
+}
+
 export interface Seccion {
   idSeccion: number;
   nombreSeccion: string;
   campos: Campo[];
   camposProps: CampoProps[];
+}
+
+export interface SeccionFormulario extends Omit<Seccion, "campos"> {
+  campos: number[];
 }
 
 export interface Campo {
