@@ -1,29 +1,45 @@
-import { PlantillaFormulario } from "@/interfaces/plantilla.interface";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-export default function Formulario({ data }: { data: PlantillaFormulario }) {
-  const [formulario, setFormulario] = useState<any>();
+import PlantillaI from "@/interfaces/plantilla.interface";
+
+export default function Formulario({ plantilla }: { plantilla: PlantillaI }) {
+  const formRef = useRef<HTMLFormElement>(null);
+  const [formulario, setFormulario] = useState("");
 
   useEffect(() => {
-    if (data) requestFormulario();
-  }, [data]);
+    if (plantilla.idPlantilla) requestFormulario();
+  }, [plantilla]);
 
   const requestFormulario = async () => {
     try {
-      const res = await fetch(process.env.API_URL + "formulario", {
+      const res = await fetch(process.env.SELF_URL + "formulario", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(plantilla),
       });
 
-      if (res.status === 200) {
-        const data = await res.json();
-        console.log(data);
+      if (res.ok) {
+        const { data } = await res.json();
+        setFormulario(data);
+      } else {
+        const err = await res.json();
+        console.log(err);
       }
-    } catch (error: any) {}
+    } catch (error: any) {
+      console.log(error);
+    }
   };
 
-  return <div>Hola</div>;
+  useEffect(() => {
+    if (formulario) {
+      const form = formRef.current as HTMLFormElement;
+      form.innerHTML = formulario;
+    }
+  }, [formulario]);
+
+  return (
+    <>
+      <form ref={formRef}></form>
+    </>
+  );
 }

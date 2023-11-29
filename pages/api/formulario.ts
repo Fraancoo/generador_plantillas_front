@@ -2,21 +2,36 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 import Plantilla from "@/interfaces/plantilla.interface";
 
-export default function getFormulario(
+export default async function getFormulario(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const plantilla = req.body;
-  const form = generateForm(plantilla);
+  if (req.method === "POST") {
+    const plantilla: Plantilla = req.body;
 
-  console.log(form);
+    const resp = await fetch(process.env.API_URL + "formulario", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(plantilla),
+    });
 
-  res.status(200).json({
-    statusCode: 200,
-    message: "Todo bien (y)",
-  });
+    if (resp.status === 200) {
+      const { data } = await resp.json();
+      console.log(data);
+      res.status(200).json(data);
+    } else {
+      const err = await resp.json();
+      res.status(resp.status).json(err);
+    }
+  } else {
+    res.status(200).json({ message: "api/formulario works!" });
+  }
 }
 
-function generateForm(plantilla: Plantilla) {
-  return "Formulario";
-}
+export const config = {
+  api: {
+    externalResolver: true,
+  },
+};

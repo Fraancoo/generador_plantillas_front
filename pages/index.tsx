@@ -27,15 +27,6 @@ export default function Home({
     secciones: [] as Seccion[],
   } as PlantillaI);
 
-  const [plantillaFormulario, setPlantillaFormulario] =
-    useState<PlantillaFormulario>({
-      idPlantilla: 1,
-      nombrePlantilla: "",
-      version: "1.0.0",
-      imprimible: true,
-      secciones: [] as SeccionFormulario[],
-    } as PlantillaFormulario);
-
   return (
     <Layout title="Generador de plantillas">
       <div className={styles.container}>
@@ -55,7 +46,7 @@ export default function Home({
             } />
           </div>
           <div className={styles.div_form}>
-            <Formulario data={plantillaFormulario} />
+            <Formulario plantilla={plantilla} />
           </div>
         </div>
       </div>
@@ -67,7 +58,7 @@ export async function getServerSideProps() {
   var tiposResultado = [] as TipoResultado[];
 
   try {
-    const res = await fetch(process.env.API_URL + "tipos-resultado");
+    const res = await fetch(process.env.SELF_URL + "tipos-resultado");
 
     if (res.status === 200) {
       const { data } = await res.json();

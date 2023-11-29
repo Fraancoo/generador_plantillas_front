@@ -78,6 +78,7 @@ export default function Plantilla({
   const deleteCampo = (i_secc: number, i_camp: number) => {
     const p = plantilla;
     p.secciones[i_secc].campos.splice(i_camp, 1);
+    p.secciones[i_secc].camposProps.splice(i_camp, 1);
     setPlantilla({ ...p });
   };
 
@@ -225,6 +226,20 @@ export default function Plantilla({
                         )
                       }
                     />
+                  </div>
+                  <div className="div_checkbox">
+                    <label htmlFor="obligatorio">
+                      <span>Obligatorio</span>
+                      <input
+                        type="checkbox"
+                        id="obligatorio"
+                        name="obligatorio"
+                        checked={c.obligatorio}
+                        onChange={(e: any) =>
+                          setCampoObligatorio(i_secc, i_camp, e.target.checked)
+                        }
+                      />
+                    </label>
                   </div>
                   <div className="div_select">
                     <label>Tipo de resultado</label>

@@ -71,6 +71,7 @@ label {
 
 input[type="text"],
 input[type="number"],
+textarea,
 select {
   padding: 7px 5px;
   outline: none;
@@ -79,6 +80,10 @@ select {
   border-radius: 3px;
   font-size: var(--paragraph-size);
   color: var(--font-color);
+}
+
+textarea {
+  width: 100% !important;
 }
 
 .div_input,
