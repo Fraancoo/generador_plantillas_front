@@ -1,0 +1,18 @@
+.container {
+  height: calc(100vh - 80px);
+}
+
+.div_title {
+  position: relative;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 1px 1px 3px var(--shadow-color);
+  z-index: 1;
+}
+
+.title {
+  font-weight: 100;
+  font-size: 2.4rem;
+}

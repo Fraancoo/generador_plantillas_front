@@ -26,7 +26,6 @@ export interface SeccionFormulario extends Omit<Seccion, "campos"> {
 export interface Campo {
   idCampo: number;
   nombreCampo: string;
-  obligatorio: boolean;
   tipoResultado: TipoResultado;
 }
 

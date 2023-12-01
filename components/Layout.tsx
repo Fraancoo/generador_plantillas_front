@@ -1,6 +1,8 @@
 import Head from "next/head";
 import { ReactNode } from "react";
 
+import styles from "@/styles/layout.module.css";
+
 export default function Layout({
   title,
   children,
@@ -16,7 +18,10 @@ export default function Layout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.webp" />
       </Head>
-      <main>{children}</main>
+      <header className={styles.div_title}>
+        <h1 className={styles.title}>Generador de plantillas</h1>
+      </header>
+      <main className={styles.container}>{children}</main>
     </>
   );
 }

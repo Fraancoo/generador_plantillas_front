@@ -31,7 +31,7 @@ export default function getTiposResultado(
 function mockupTiposResultado(): TipoResultado[] {
   return [
     {
-      idTipoResultado: "number",
+      idTipoResultado: "num",
       nombreTipoResultado: "Numérico",
     },
     {

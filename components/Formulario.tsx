@@ -37,9 +37,5 @@ export default function Formulario({ plantilla }: { plantilla: PlantillaI }) {
     }
   }, [formulario]);
 
-  return (
-    <>
-      <form ref={formRef}></form>
-    </>
-  );
+  return <form ref={formRef} style={{ padding: "15px" }}></form>;
 }

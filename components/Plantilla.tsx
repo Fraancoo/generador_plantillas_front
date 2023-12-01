@@ -56,9 +56,8 @@ export default function Plantilla({
   const addCampo = (i_secc: number) => {
     const p = plantilla,
       campo = {
-        idCampo: p.secciones[i_secc].campos.length + 1,
+        idCampo: getCampoID(),
         nombreCampo: "",
-        obligatorio: false,
         tipoResultado: tiposResultado[0]
           ? tiposResultado[0]
           : ({} as TipoResultado),
@@ -69,10 +68,16 @@ export default function Plantilla({
     p.secciones[i_secc].camposProps.push({
       index: p.secciones[i_secc].campos.length - 1,
       idCampo: campo.idCampo,
-      obligatorio: campo.obligatorio,
+      obligatorio: false,
     } as CampoProps);
 
     setPlantilla({ ...p });
+  };
+
+  const getCampoID = () => {
+    var camps = 0;
+    for (const s of plantilla.secciones) for (const c of s.campos) camps++;
+    return camps + 1;
   };
 
   const deleteCampo = (i_secc: number, i_camp: number) => {
@@ -99,7 +104,6 @@ export default function Plantilla({
     status: boolean
   ) => {
     const p = plantilla;
-    p.secciones[i_secc].campos[i_camp].obligatorio = status;
     p.secciones[i_secc].camposProps[i_camp].obligatorio = status;
     setPlantilla({ ...p });
   };
@@ -124,32 +128,35 @@ export default function Plantilla({
   };
 
   return (
-    <form
-      className={styles.plantilla}
-      onSubmit={(e: any) => e.preventDefault()}
-    >
-      <div className="div_input">
-        <label htmlFor="nombrePlantilla">Nombre de la plantilla:</label>
+    <form className={styles.form} onSubmit={(e: any) => e.preventDefault()}>
+      <div className={styles.div_input}>
+        <label htmlFor="nombrePlantilla" className={styles.label}>
+          Nombre de la plantilla:
+        </label>
         <input
           id="nombrePlantilla"
           name="nombrePlantilla"
           type="text"
+          className={styles.input_text}
           value={plantilla.nombrePlantilla}
           onChange={(e: any) => setPlantillaData(e.target.name, e.target.value)}
         />
       </div>
-      <div className="div_input">
-        <label htmlFor="version">Versión de la plantilla:</label>
+      <div className={styles.div_input}>
+        <label htmlFor="version" className={styles.label}>
+          Versión de la plantilla:
+        </label>
         <input
           id="version"
           name="version"
           type="text"
+          className={styles.input_text}
           value={plantilla.version}
           onChange={(e: any) => setPlantillaData(e.target.name, e.target.value)}
         />
       </div>
-      <div className="div_checkbox">
-        <label htmlFor="imprimible">
+      <div className={styles.div_checkbox}>
+        <label htmlFor="imprimible" className={styles.label}>
           <span>Plantilla imprimible:</span>
           <input
             id="imprimible"
@@ -162,60 +169,71 @@ export default function Plantilla({
           />
         </label>
       </div>
-      <div className="div_secciones">
-        <div className="div_subtitle">
-          <h2 className="subtitle">
+      <div className={styles.div_secciones}>
+        <div className={styles.div_subtitle}>
+          <h2 className={styles.subtitle}>
             Secciones ({plantilla.secciones.length} secciones)
           </h2>
         </div>
         {plantilla.secciones.map((s, i_secc) => (
-          <div key={`secc_${i_secc}`} className="div_seccion">
-            <div className="div_close">
-              <span className="close" onClick={() => deleteSeccion(i_secc)}>
+          <div key={`secc_${i_secc}`} className={styles.div_seccion}>
+            <div className={styles.div_close}>
+              <span
+                className={styles.close}
+                onClick={() => deleteSeccion(i_secc)}
+              >
                 ✘
               </span>
             </div>
-            <div className="div_input">
-              <label htmlFor="nombreSeccion">
+            <div className={styles.div_input}>
+              <label
+                htmlFor={`nombreSeccion_${i_secc}`}
+                className={styles.label}
+              >
                 Nombre de la sección {i_secc + 1}
               </label>
               <input
-                id="nombreSeccion"
+                id={`nombreSeccion_${i_secc}`}
                 name="nombreSeccion"
                 type="text"
+                className={styles.input_text}
                 value={s.nombreSeccion}
                 onChange={(e: any) =>
                   setSeccionData(i_secc, e.target.name, e.target.value)
                 }
               />
             </div>
-            <div className="div_campos">
-              <div className="div_subtitle">
-                <h2 className="subtitle">
+            <div className={styles.div_campos}>
+              <div className={styles.div_subtitle}>
+                <h2 className={styles.subtitle}>
                   Campos ({plantilla.secciones[i_secc].campos.length} campos)
                 </h2>
               </div>
               {s.campos.map((c, i_camp) => (
                 <div
                   key={`secc_${i_secc}_camp_${i_camp}`}
-                  className="div_campo"
+                  className={styles.div_campo}
                 >
-                  <div className="div_close">
+                  <div className={styles.div_close}>
                     <span
-                      className="close"
+                      className={styles.close}
                       onClick={() => deleteCampo(i_secc, i_camp)}
                     >
                       ✘
                     </span>
                   </div>
-                  <div className="div_input">
-                    <label htmlFor="nombreCampo">
+                  <div className={styles.div_input}>
+                    <label
+                      htmlFor={`nombreCampo_${i_secc}_${i_camp}`}
+                      className={styles.label}
+                    >
                       Nombre del campo {i_camp + 1}
                     </label>
                     <input
-                      id="nombreCampo"
+                      id={`nombreCampo_${i_secc}_${i_camp}`}
                       name="nombreCampo"
                       type="text"
+                      className={styles.input_text}
                       value={c.nombreCampo}
                       onChange={(e: any) =>
                         setCampoData(
@@ -227,24 +245,28 @@ export default function Plantilla({
                       }
                     />
                   </div>
-                  <div className="div_checkbox">
-                    <label htmlFor="obligatorio">
+                  <div className={styles.div_checkbox}>
+                    <label
+                      htmlFor={`obligatorio_${i_secc}_${i_camp}`}
+                      className={styles.label}
+                    >
                       <span>Obligatorio</span>
                       <input
                         type="checkbox"
-                        id="obligatorio"
+                        id={`obligatorio_${i_secc}_${i_camp}`}
                         name="obligatorio"
-                        checked={c.obligatorio}
+                        checked={s.camposProps[i_camp].obligatorio}
                         onChange={(e: any) =>
                           setCampoObligatorio(i_secc, i_camp, e.target.checked)
                         }
                       />
                     </label>
                   </div>
-                  <div className="div_select">
-                    <label>Tipo de resultado</label>
+                  <div className={styles.div_select}>
+                    <label className={styles.label}>Tipo de resultado</label>
                     <select
                       name="idTipoResultado"
+                      className={styles.select}
                       value={c.tipoResultado.idTipoResultado}
                       onChange={(e: any) =>
                         setTipoResultado(i_secc, i_camp, e.target.value)
@@ -264,9 +286,9 @@ export default function Plantilla({
                 </div>
               ))}
             </div>
-            <div className="div_btn">
+            <div className={styles.div_btn}>
               <button
-                className="btn btn-green"
+                className={`${styles.btn} ${styles.btn_green}`}
                 onClick={() => addCampo(i_secc)}
               >
                 Agregar campo
@@ -274,8 +296,11 @@ export default function Plantilla({
             </div>
           </div>
         ))}
-        <div className="div_btn">
-          <button className="btn btn-blue" onClick={addSeccion}>
+        <div className={styles.div_btn}>
+          <button
+            className={`${styles.btn} ${styles.btn_blue}`}
+            onClick={addSeccion}
+          >
             Agregar sección
           </button>
         </div>

@@ -1,4 +1,113 @@
-.plantilla {
+.form {
   display: grid;
   gap: 25px;
+  box-shadow: 0 0 3px var(--border-color);
+}
+
+.form,
+.div_seccion,
+.div_campo {
+  padding: 20px;
+}
+
+.div_seccion {
+  box-shadow: 0 0 3px var(--bold-blue);
+}
+
+.div_campo {
+  box-shadow: 0 0 3px var(--bold-green);
+}
+
+.div_secciones,
+.div_seccion,
+.div_campos,
+.div_campo {
+  display: grid;
+  gap: 10px 0;
+}
+
+.subtitle {
+  font-weight: bold;
+  font-size: var(--paragraph-size);
+}
+
+.div_close {
+  text-align: end;
+}
+
+.close {
+  font-size: var(--heading2-size);
+  cursor: pointer;
+  transition: 200ms;
+}
+
+.close:hover {
+  color: var(--red);
+}
+
+.label {
+  color: var(--font-color);
+  font-size: var(--paragraph-size);
+}
+
+.input_text,
+.select {
+  padding: 7px 5px;
+  outline: none;
+  border: none;
+  box-shadow: 0 0 3px var(--border-color);
+  border-radius: 3px;
+  font-size: var(--paragraph-size);
+  color: var(--font-color);
+}
+
+.div_input,
+.div_select {
+  width: 100%;
+  display: grid;
+  gap: 10px 0;
+}
+
+.div_checkbox > label {
+  display: flex;
+  gap: 0 10px;
+}
+
+.div_checkbox > label > span {
+  user-select: none;
+}
+
+.div_btn {
+  display: flex;
+  margin: 10px 0;
+}
+
+.btn {
+  width: 100%;
+  padding: 10px 0;
+  text-align: center;
+  border: none;
+  user-select: none;
+  border-radius: 5px;
+  font-size: var(--paragraph-size);
+  cursor: pointer;
+  transition: 300ms;
+}
+
+.btn_blue {
+  color: white;
+  background-color: var(--blue);
+}
+
+.btn_blue:hover {
+  background-color: var(--bold-blue);
+}
+
+.btn_green {
+  color: white;
+  background-color: var(--green);
+}
+
+.btn_green:hover {
+  background-color: var(--bold-green);
 }
