@@ -52,6 +52,7 @@
 
 .input_text,
 .select {
+  width: 100%;
   padding: 7px 5px;
   outline: none;
   border: none;

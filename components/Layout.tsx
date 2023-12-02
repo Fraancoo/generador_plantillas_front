@@ -1,14 +1,15 @@
 import Head from "next/head";
+import Script from "next/script";
 import { ReactNode } from "react";
 
 import styles from "@/styles/layout.module.css";
 
 export default function Layout({
-  title,
   children,
+  title,
 }: {
-  title: string;
   children: ReactNode;
+  title?: string;
 }) {
   return (
     <>
@@ -22,6 +23,7 @@ export default function Layout({
         <h1 className={styles.title}>Generador de plantillas</h1>
       </header>
       <main className={styles.container}>{children}</main>
+      <Script src={process.env.API_URL + "formulario/script"} />
     </>
   );
 }

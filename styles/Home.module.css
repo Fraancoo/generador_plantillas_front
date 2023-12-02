@@ -1,26 +1,28 @@
 .container {
   height: 100%;
+  padding: 25px;
+}
+
+.menu {
   display: flex;
   flex-wrap: wrap;
-  overflow: hidden;
+  gap: 30px;
 }
 
-.div_plantilla,
-.div_preview,
-.div_form {
-  height: 100%;
+.item {
+  height: 150px;
+  width: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--blue);
+  border-radius: 5px;
+  color: white;
+  user-select: none;
+  font-size: 1.6rem;
+  transition: 300ms;
 }
 
-.div_plantilla,
-.div_form {
-  overflow-y: scroll;
-}
-
-.div_plantilla,
-.div_preview {
-  width: 33%;
-}
-
-.div_form {
-  width: 34%;
+.item:hover {
+  background-color: var(--bold-blue);
 }
