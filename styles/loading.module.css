@@ -1,0 +1,20 @@
+.container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container > svg {
+  animation: anim_loading 500ms infinite linear;
+}
+
+@keyframes anim_loading {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

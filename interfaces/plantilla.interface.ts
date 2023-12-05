@@ -6,6 +6,7 @@ export default interface Plantilla {
   version: string;
   imprimible: boolean;
   secciones: Seccion[];
+  resultados?: SeccionResultado[];
 }
 
 export interface PlantillaFormulario extends Omit<Plantilla, "secciones"> {
@@ -33,4 +34,14 @@ export interface CampoProps {
   index: number;
   idCampo: number;
   obligatorio: boolean;
+}
+
+export interface SeccionResultado {
+  idSeccion: number;
+  campos: CampoResultado[];
+}
+
+export interface CampoResultado {
+  idCampo: number;
+  valor?: string | number;
 }

@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 import Script from "next/script";
 import { ReactNode } from "react";
 
@@ -20,10 +21,15 @@ export default function Layout({
         <link rel="icon" href="/favicon.webp" />
       </Head>
       <header className={styles.div_title}>
-        <h1 className={styles.title}>Generador de plantillas</h1>
+        <Link href="/">
+          <h1 className={styles.title}>Generador de plantillas</h1>
+        </Link>
       </header>
       <main className={styles.container}>{children}</main>
-      <Script src={process.env.API_URL + "formulario/script"} />
+      <Script
+        src={process.env.API_URL + "formulario/script"}
+        strategy="lazyOnload"
+      />
     </>
   );
 }

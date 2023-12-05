@@ -15,4 +15,9 @@
 .title {
   font-weight: 100;
   font-size: 2rem;
+  transition: 300ms;
+}
+
+.title:hover {
+  color: var(--bold-blue);
 }

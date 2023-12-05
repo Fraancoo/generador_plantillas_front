@@ -26,7 +26,10 @@ export default async function getFormulario(
       res.status(resp.status).json(err);
     }
   } else {
-    res.status(200).json({ message: "api/formulario works!" });
+    res.status(200).json({
+      statusCode: 200,
+      message: "API para generar el formulario",
+    });
   }
 }
 

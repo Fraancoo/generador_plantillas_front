@@ -25,7 +25,7 @@ export default function Home() {
       <div className={styles.container}>
         <div className={styles.menu}>
           {menu.map((item) => (
-            <Link href={"/" + item.href}>
+            <Link href={"/" + item.href} key={item.name}>
               <div className={styles.item}>{item.name}</div>
             </Link>
           ))}

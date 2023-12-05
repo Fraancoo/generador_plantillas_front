@@ -11,7 +11,15 @@ import styles from "@/styles/preview.module.css";
 
 import CopyIcon from "./CopyIcon";
 
-export default function Preview({ data }: { data: PlantillaI }) {
+export default function Preview({
+  data,
+  showSave,
+  showGen,
+}: {
+  data: PlantillaI;
+  showSave?: boolean;
+  showGen?: boolean;
+}) {
   const saveRef = useRef<HTMLPreElement>(null),
     genRef = useRef<HTMLPreElement>(null);
 
@@ -29,6 +37,7 @@ export default function Preview({ data }: { data: PlantillaI }) {
       gen.innerText = "{\n";
       gen.innerText += setGeneratePlantilla();
       gen.innerText += "}";
+      localStorage.setItem("plantilla", JSON.stringify(data));
     }
   }, [data]);
 
@@ -264,24 +273,28 @@ export default function Preview({ data }: { data: PlantillaI }) {
 
   return (
     <div className={styles.container}>
-      <div className={styles.content}>
-        <div className={styles.header}>
-          <h2 className={styles.subtitle}>Guardar plantilla</h2>
-          <CopyIcon hover={"var(--bold-blue)"} onClick={copySave} />
+      {(showSave === undefined || showSave) && (
+        <div className={styles.content}>
+          <div className={styles.header}>
+            <h2 className={styles.subtitle}>Guardar plantilla</h2>
+            <CopyIcon hover={"var(--bold-blue)"} onClick={copySave} />
+          </div>
+          <div className={styles.div_pre}>
+            <pre ref={saveRef} className={styles.pre}></pre>
+          </div>
         </div>
-        <div className={styles.div_pre}>
-          <pre ref={saveRef} className={styles.pre}></pre>
+      )}
+      {(showGen === undefined || showGen) && (
+        <div className={styles.content}>
+          <div className={styles.header}>
+            <h2 className={styles.subtitle}>Generar formulario</h2>
+            <CopyIcon hover={"var(--bold-blue)"} onClick={copyGen} />
+          </div>
+          <div className={styles.div_pre}>
+            <pre ref={genRef} className={styles.pre}></pre>
+          </div>
         </div>
-      </div>
-      <div className={styles.content}>
-        <div className={styles.header}>
-          <h2 className={styles.subtitle}>Generar formulario</h2>
-          <CopyIcon hover={"var(--bold-blue)"} onClick={copyGen} />
-        </div>
-        <div className={styles.div_pre}>
-          <pre ref={genRef} className={styles.pre}></pre>
-        </div>
-      </div>
+      )}
     </div>
   );
 }

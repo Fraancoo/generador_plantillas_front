@@ -39,10 +39,9 @@ export default function Formulario({ plantilla }: { plantilla: PlantillaI }) {
 
   const sendForm = (e: any) => {
     e.preventDefault();
-    console.log(e);
   };
 
   return (
-    <form ref={formRef} style={{ padding: "15px" }} onSubmit={sendForm}></form>
+    <form ref={formRef} onSubmit={sendForm} style={{ padding: "15px" }}></form>
   );
 }

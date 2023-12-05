@@ -65,3 +65,54 @@ input {
   max-height: 160px;
   width: 100% !important;
 }
+
+.div_btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.btn {
+  height: 30px;
+  border: none;
+  font-size: 12pt;
+  border-radius: 3px;
+  white-space: nowrap;
+  transition: 300ms;
+  cursor: pointer;
+}
+
+.btn_50 {
+  width: calc(50% - 5px);
+}
+
+.btn_100 {
+  width: 100%;
+}
+
+.btn_green {
+  background-color: var(--green);
+  color: white;
+}
+
+.btn_green:hover {
+  background-color: var(--bold-green);
+}
+
+.btn_blue {
+  background-color: #00b0ff;
+  color: white;
+}
+
+.btn_blue:hover {
+  background-color: #03a0f0;
+}
+
+.btn_red {
+  background-color: #f44336;
+  color: white;
+}
+
+.btn_red:hover {
+  background-color: #b71c1c;
+}
